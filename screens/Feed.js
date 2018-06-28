@@ -7,8 +7,10 @@ import CardList from '../components/CardList';
 
 export default class Feed extends React.Component {
   static propTypes = {
-    style: ViewPropTypes.style
-  }
+    style: ViewPropTypes.style,
+    commentsForItem: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.string)).isRequired,
+    onPressComments: PropTypes.func.isRequired
+  };
 
   static defaultProps = {
     style: null
@@ -19,38 +21,34 @@ export default class Feed extends React.Component {
     items: []
   }
 
-  async componentDidMount(){
+  async componentDidMount() {
     try {
       const items = await fetchImages();
 
-      this.setState({
-        loading: false,
-        items
-      })
+      this.setState({ loading: false, items });
     } catch (e) {
-      this.setState({
-        loading: false,
-        error: true
-      })
+      this.setState({ loading: false, error: true });
     }
   }
 
-  render (){
-    const { style } = this.props;
+  render() {
     const { loading, error, items } = this.state;
+    const { commentsForItem, onPressComments, style } = this.props;
 
-    if(loading) {
-      return <ActivityIndicator size="large" />
+    if (loading) {
+      return <ActivityIndicator size="large" />;
     }
 
-    if(error) {
+    if (error) {
       return <Text>Error</Text>;
     }
 
-    return (
-      <SafeAreaView style={style}>
-        <CardList items={items} />
-      </SafeAreaView>
-    )
+    return (<SafeAreaView style={style}>
+      <CardList 
+      items={items}
+      commentsForItem={commentsForItem}
+      onPressComments={onPressComments}
+      />
+    </SafeAreaView>);
   }
 }

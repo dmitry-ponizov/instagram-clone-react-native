@@ -1,15 +1,16 @@
-import React from 'react'
+import React from 'react';
 import { StyleSheet, TextInput, View } from 'react-native';
 import PropTypes from 'prop-types';
 
-export default CommentInput extends React.Component {
+export default class CommentInput extends React.Component {
+
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
     placeholder: PropTypes.string,
   }
 
   static defaultProps = {
-    placeholder = ''
+    placeholder: ''
   }
 
   state = {
@@ -17,16 +18,16 @@ export default CommentInput extends React.Component {
   }
 
   handleChangeText = text => {
-    this.setState({ text })
+    this.setState({ text });
   }
 
   handleSubmitEditing = () => {
     const { onSubmit } = this.props;
     const { text } = this.state;
 
-    if(!text) return;
+    if (!text) return;
     onSubmit(text);
-    this.setState({ text: ''})
+    this.setState({ text: '' });
   }
 
   render() {
@@ -42,13 +43,13 @@ export default CommentInput extends React.Component {
           underlineColorAndroid="transparent"
           onChangeText={this.handleChangeText}
           onSubmitEditing={this.handleSubmitEditing}
-          />
+        />
       </View>
-    )
+    );
   }
 }
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: 'rgba(0,0,0,0.1)',
@@ -58,4 +59,4 @@ const style = StyleSheet.create({
   input: {
     flex: 1
   }
-})
+});

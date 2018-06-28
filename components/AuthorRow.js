@@ -5,15 +5,16 @@ import Avatar from './Avatar';
 import getAvatarColor from '../utils/getAvatarColor';
 import getInitials from '../utils/getInitials';
 
-export default function AuthorRow({ fullname, linkText, onPressLinkText }){
-
+export default function AuthorRow({ fullname, linkText, onPressLinkText }) {
     return (
       <View style={styles.container} >
-        <Avatar size={35}
+        <Avatar
+          size={35}
           initials={getInitials(fullname)}
           backgroundColor={getAvatarColor(fullname)}
-         />
-         <Text style={styles.text}
+        />
+         <Text
+          style={styles.text}
           numbersOfLines={1}
          >
             {fullname}
@@ -24,14 +25,14 @@ export default function AuthorRow({ fullname, linkText, onPressLinkText }){
            </TouchableOpacity>
          )}
       </View>
-    )
+    );
 }
 
 AuthorRow.propTypes = {
   fullname: PropTypes.string.isRequired,
   linkText: PropTypes.string.isRequired,
   onPressLinkText: PropTypes.func.isRequired
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -44,4 +45,4 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 6
   }
-})
+});
